@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover | Learn Loop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #121212;
+            color: white;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #1c3d3d;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 10px 0;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #FFD700;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .card h3 {
+            margin-top: 10px;
+        }
+
+        .stars {
+            color: #FFD700;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .skills {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .skills span {
+            background: #009688;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+        }
+
+        .btn {
+            background: #009688;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #00796b;
+        }
+
+        .profile-btn {
+            background: transparent;
+            border: 1px solid white;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #57a99a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #FFD700;
+        }
+
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .profile-icon i {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>For You</h2>
+        <a href="#">Popular</a>
+        <a href="#">Web Development</a>
+        <a href="#">Machine Learning</a>
+        <a href="#">Graphic Design</a>
+        <a href="#">Soft Skills</a>
+        <a href="#">Others</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="logo">Learn Loop</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#">Discover</a>
+                <a href="#">Your Chats</a>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                    
+                    <a href="profile.html">My Profile</a>
+
+                </div>
+            </div>
+        </div>
+
+        <h2>For You</h2>
+        <input type="text" class="search-bar" placeholder="Search...">
+
+        <div class="cards-container">
+            <!-- User Card 1 -->
+            <div class="card">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User">
+                <h3>Paakhi Maheshwari</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>Computer Science student specializing in data science and machine learning.</p>
+                <div class="skills">
+                    <span>Machine Learning</span>
+                    <span>Python</span>
+                    <span>Data Science</span>
+                </div>
+                <div class="buttons">
+                    <a href="chat.html">
+                        <button class="btn">Connect</button>
+                    </a>
+                    <button class="btn profile-btn">View Profile</button>
+                </div>
+
+                
+            </div>
+
+            <!-- User Card 2 -->
+            <div class="card">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="User">
+                <h3>Anil Khosla</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <p>Professor - Maths 2 @ IIIT Raipur. Specializing in Algebra.</p>
+                <div class="skills">
+                    <span>Mathematics</span>
+                    <span>Algebra</span>
+                    <span>Arithmetic</span>
+                </div>
+                <div class="buttons">
+                    <button class="btn">Connect</button>
+                    <button class="btn profile-btn">View Profile</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

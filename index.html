@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLoop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #c7b9b9;
+            color: white;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(1, 124, 130, 0.9);
+            padding: 15px 50px;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff5e00;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            background: linear-gradient(135deg, rgba(0, 150, 136, 0.7), rgba(0, 0, 0, 0.8));
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            font-weight: 600;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            
+            text-transform: none;
+            letter-spacing: 3px;
+        }
+
+        .cta-button {
+            margin-top: 15px;
+            padding: 3px 5px;
+            background: #4ea49d;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #e68900;
+        }
+
+        /* Auth Section */
+        .auth-container {
+            margin-top: 4px;
+        }
+
+        .auth-container input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 250px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .auth-container button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .auth-container button.signup { background: green; color: white; }
+        .auth-container button.login { background: blue; color: white; }
+        .auth-container button.logout { background: red; color: white; display: none; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Learn Loop</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="why.html">Why Learn Loop</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Unlock Skills, Earn Rewards, Connect Globally</h1>
+            <p>Swap skills with talented people and grow together</p>
+            <a href="signup.html" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Authentication Section -->
+    
+
+    <!-- Firebase SDK & Authentication -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
+        import { getFirestore, collection, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
+
+        // 🔥 Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrK_27esVTtF-Z5-z4cqpIs2R0NApLVz4",
+            authDomain: "learnloop1-64ec0.firebaseapp.com",
+            projectId: "learnloop1-64ec0",
+            storageBucket: "learnloop1-64ec0.appspot.com",
+            messagingSenderId: "674463397886",
+            appId: "1:674463397886:web:df3f86c47bbd85820772af",
+            measurementId: "G-H653Z32K00"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Elements
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const signupBtn = document.getElementById("signup-btn");
+        const loginBtn = document.getElementById("login-btn");
+        const logoutBtn = document.getElementById("logout-btn");
+        const userInfo = document.getElementById("user-info");
+
+        // Sign Up
+        signupBtn.addEventListener("click", async () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                await setDoc(doc(db, "users", user.uid), { email });
+                alert("✅ User signed up successfully!");
+            } catch (error) {
+                alert(`❌ Error: ${error.message}`);
+            }
+        });
+
+        // Login
+        loginBtn.addEventListener("click", async () => {
+            try {
+                await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                alert("✅ Logged in!");
+            } catch (error) {
+                alert(`❌ ${error.message}`);
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener("click", async () => {
+            await signOut(auth);
+            alert("✅ Logged out!");
+        });
+
+        // Track Auth Status
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userInfo.innerText = `Logged in as: ${user.email}`;
+                logoutBtn.style.display = "inline-block";
+            } else {
+                userInfo.innerText = "";
+                logoutBtn.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>

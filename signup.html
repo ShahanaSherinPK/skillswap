@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Learn Loop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1c3d3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1c3d3d;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn, .add-skill-btn {
+            width: 100%;
+            background: #009688;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover, .add-skill-btn:hover {
+            background: #00796b;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .form-footer a {
+            color: #009688;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Profile</label>
+                <input type="text" id="linkedin" placeholder="Enter your LinkedIn link">
+            </div>
+
+            <!-- Skills Proficient At -->
+            <div class="form-group">
+                <label for="skills">Skills Proficient At</label>
+                <input type="text" id="skills" placeholder="Enter skills (comma separated)" required>
+            </div>
+
+            <!-- Skills to Learn -->
+            <div class="form-group">
+                <label for="skills-learn">Skills to Learn</label>
+                <input type="text" id="skills-learn" placeholder="Enter skills to learn (comma separated)">
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+
+        <div class="form-footer">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <script>
+        // const firebaseConfig = {
+        //     apiKey: "AIzaSyBrK_27esVTtF-Z5-z4cqpIs2R0NApLVz4",
+        //     authDomain: "learnloop1-64ec0.firebaseapp.com",
+        //     projectId: "learnloop1-64ec0",
+        //     storageBucket: "learnloop1-64ec0.firebasestorage.app",
+        //     messagingSenderId: "674463397886",
+        //     appId: "1:674463397886:web:df3f86c47bbd85820772af",
+        //     measurementId: "G-H653Z32K00"
+        // };
+
+        // // Initialize Firebase
+        // const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+        // firebase.initializeApp(firebaseConfig);
+        // const auth = firebase.auth();
+        // const db = firebase.firestore();
+
+        // Handle Sign-Up
+        document.getElementById("signup-form").addEventListener("submit", async (e) => {
+            e.preventDefault()
+            alert("clickeds");
+
+            // Get form values
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username").value;
+            const linkedin = document.getElementById("linkedin").value;
+            const skills = document.getElementById("skills").value.split(",");
+            const skillsToLearn = document.getElementById("skills-learn").value.split(",");
+            const password = document.getElementById("password").value;
+
+            // Firebase code for creating user and saving to Firestore is commented out
+            // try {
+            //     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            //     const user = userCredential.user;
+            //     await db.collection("users").doc(user.uid).set({
+            //         name,
+            //         email,
+            //         username,
+            //         linkedin,
+            //         skills,
+            //         skillsToLearn,
+            //         createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            //     });
+
+            alert("Sign-up successful! Redirecting...");
+            window.location.href = "dashboard.html"; // Redirect to dashboard page
+            // } catch (error) {
+            //     alert(error.message);
+            // }
+        });
+    </script>
+
+</body>
+</html>

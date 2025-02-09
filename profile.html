@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | Learn Loop</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #008080;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: yellow;
+        }
+
+        .profile-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 700px;
+            margin: 30px auto;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .rating {
+            color: yellow;
+        }
+
+        /* Buttons */
+        .button-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .connect-btn {
+            background-color: #008080;
+            color: white;
+        }
+
+        .report-btn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .edit-btn {
+            background-color: #444;
+            color: white;
+            margin-left: auto;
+        }
+
+        /* Skills */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background-color: green;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .skill-tag.yellow {
+            background-color: yellow;
+            color: black;
+        }
+
+        /* Education */
+        .education {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .social-links i:hover {
+            color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>LEARN LOOP</h1>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Discover</a>
+            <a href="#">Your Chats</a>
+            <i class="fas fa-user-circle profile-icon"></i>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User" class="profile-pic">
+            <div class="profile-info">
+                <h2>Paakhi Maheshwari</h2>
+                <p class="rating">⭐⭐⭐⭐⭐ <span>(5)</span></p>
+                <p class="bio">Computer Science student specializing in data science and machine learning.</p>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button class="connect-btn">Connect</button>
+            <button class="report-btn">Report</button>
+            <button class="edit-btn">Edit Profile ✏️</button>
+        </div>
+
+        <!-- Skills -->
+        <h3>Skills Proficient At</h3>
+        <div class="skills">
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Machine Learning</span>
+        </div>
+
+        <!-- Education -->
+        <h3>Education</h3>
+        <div class="education">
+            <h4>Jaypee Institute of Information Technology, Noida-62</h4>
+            <p class="course">Computer Science | September 2021 - June 2025</p>
+            <p class="desc">Pursued degree in CSE from 2021 to 2025.</p>
+            <h5>Skills Used:</h5>
+            <div class="skills">
+                <span class="skill-tag yellow">HTML</span>
+                <span class="skill-tag yellow">CSS</span>
+                <span class="skill-tag yellow">JavaScript</span>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <h3>Social Links</h3>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-link"></i></a>
+        </div>
+    </div>
+
+</body>
+</html>

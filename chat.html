@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | Learn Loop</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #222; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .chat-container { width: 80%; max-width: 900px; background: #333; padding: 20px; border-radius: 10px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .btn { background: #009688; color: white; padding: 10px; border: none; cursor: pointer; }
+        .chat-box { height: 300px; overflow-y: scroll; background: #444; padding: 10px; border-radius: 5px; }
+        .chat-input { width: 80%; padding: 10px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); justify-content: center; align-items: center; }
+        .modal-content { background: #222; padding: 20px; border-radius: 5px; width: 300px; }
+        .modal input { width: 100%; padding: 8px; margin-bottom: 10px; }
+        .modal-buttons { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <h2>Chat with User</h2>
+            <button class="btn" onclick="openModal()">Schedule Video Call</button>
+        </div>
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="message" class="chat-input" placeholder="Type your message...">
+        <button class="btn" onclick="sendMessage()">Send</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <h3>Schedule Video Call</h3>
+            <input type="text" id="caller-name" placeholder="Your Name">
+            <input type="email" id="caller-email" placeholder="Email Address">
+            <input type="date" id="call-date">
+            <input type="time" id="call-time">
+            <div class="modal-buttons">
+                <button class="btn" onclick="submitSchedule()">Submit</button>
+                <button class="btn" style="background: red;" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrK_27esVTtF-Z5-z4cqpIs2R0NApLVz4",
+            authDomain: "learnloop1-64ec0.firebaseapp.com",
+            projectId: "learnloop1-64ec0",
+            storageBucket: "learnloop1-64ec0.firebasestorage.app",
+            messagingSenderId: "674463397886",
+            appId: "1:674463397886:web:df3f86c47bbd85820772af",
+            measurementId: "G-H653Z32K00"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        function openModal() { document.getElementById('scheduleModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('scheduleModal').style.display = 'none'; }
+        
+        function submitSchedule() {
+            const name = document.getElementById('caller-name').value;
+            const email = document.getElementById('caller-email').value;
+            const date = document.getElementById('call-date').value;
+            const time = document.getElementById('call-time').value;
+            
+            if (name && email && date && time) {
+                db.collection("scheduledCalls").add({ name, email, date, time })
+                    .then(() => {
+                        alert("Call Scheduled Successfully!");
+                        closeModal();
+                    })
+                    .catch(error => alert("Error: " + error.message));
+            } else {
+                alert("Please fill all fields");
+            }
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (message.trim() === "") return;
+            db.collection("messages").add({ text: message, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+                .then(() => {
+                    document.getElementById('message').value = "";
+                })
+                .catch(error => alert("Error sending message: " + error.message));
+        }
+
+        db.collection("messages").orderBy("timestamp").onSnapshot(snapshot => {
+            document.getElementById('chat-box').innerHTML = snapshot.docs.map(doc => `<p>${doc.data().text}</p>`).join('');
+        });
+    </script>
+</body>
+</html>
